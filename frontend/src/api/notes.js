@@ -1,4 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/notes';
+// In production (when served by Express), use the relative path.
+// In development, fallback to localhost:5000 or a provided VITE_API_URL.
+const API_URL = import.meta.env.PROD 
+  ? '/api/notes' 
+  : (import.meta.env.VITE_API_URL || 'http://localhost:5000/api/notes');
 
 export const getNotes = async () => {
   const response = await fetch(API_URL);
