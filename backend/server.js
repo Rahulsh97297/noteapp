@@ -21,22 +21,18 @@ app.use((err, req, res, next) => {
 // API Routes
 app.use('/api/notes', notesRouter);
 
-// Serve Frontend in Production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// Local Development Fallback
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
 
-  // Any route that is not an API route will be redirected to the React index.html
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
-  });
-} else {
-  // Catch-all for undefined API routes in development
-  app.use((req, res) => {
-    res.status(404).json({ error: 'Route not found' });
+// Vercel Serverless Functions require the app to be exported, 
+// rather than strictly calling app.listen()
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Export for Vercel
+module.exports = app;
