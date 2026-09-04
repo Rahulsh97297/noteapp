@@ -73,4 +73,6 @@ npm run dev
 *   **Express Routes/Controllers:** Follows a standard MVC-lite pattern separating route definitions from business logic for maintainability.
 *   **Storage:** Utilizes an in-memory array to ensure the application is immediately runnable without requiring a local database installation.
 *   **Validation & Errors:** The frontend uses conditional rendering to block invalid submissions. The backend validates payloads directly in the controller, returning consistent JSON structures and appropriate HTTP status codes (`400`, `404`, `500`).
+
 **Website Video Link:** https://drive.google.com/file/d/1OD0Mr0XUdAcv2GSJMvgko-2k3GKrkPQG/view?usp=sharing
+**Code EXplaining Video:** https://drive.google.com/file/d/17XlISpBlm6HXf8tFyasCJALiC9XzUgOW/view?usp=sharing
