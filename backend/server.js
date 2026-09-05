@@ -38,4 +38,4 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = app;
 
 //config app
-const port =process.env.PORT || 4000;
+const port =process.env.PORT || 5000;
