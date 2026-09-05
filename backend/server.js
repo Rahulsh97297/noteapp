@@ -36,3 +36,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Export for Vercel
 module.exports = app;
+
+//config app
+const port =process.env.PORT || 4000;
