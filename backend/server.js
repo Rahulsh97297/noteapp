@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const notesRouter = require('./routes/notes');
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const notesRouter = require("./routes/notes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,23 +12,22 @@ app.use(express.json());
 
 // Handle malformed JSON errors
 app.use((err, req, res, next) => {
-  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-    return res.status(400).json({ error: 'Malformed JSON payload' });
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res.status(400).json({ error: "Malformed JSON payload" });
   }
   next();
 });
 
 // API Routes
-app.use('/api/notes', notesRouter);
+app.use("/api/notes", notesRouter);
 
 // Local Development Fallback
 app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+  res.status(404).json({ error: "Route not found" });
 });
 
-// Vercel Serverless Functions require the app to be exported, 
-// rather than strictly calling app.listen()
-if (process.env.NODE_ENV !== 'production') {
+// Vercel handles the listener for serverless deployments.
+if (!process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
@@ -36,6 +35,3 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Export for Vercel
 module.exports = app;
-
-//config app
-const port =process.env.PORT || 5000;
